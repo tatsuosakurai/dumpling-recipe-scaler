@@ -1,25 +1,23 @@
 const recipes = [
   {
-    title: "肉餡",
+    title: "🍖 肉餡",
     baseQuantity: 160,
-    note: "160個分を基準に計算",
     ingredients: [
       { name: "豚バラ", amount: 500, unit: "g" },
       { name: "豚肩ロース", amount: 500, unit: "g" },
-      { name: "塩", amount: 2, unit: "小さじ" },
-      { name: "キビ砂糖", amount: 2, unit: "小さじ" },
-      { name: "粗挽き胡椒", amount: 1, unit: "大さじ" },
-      { name: "鶏ガラスープ", amount: 1, unit: "大さじ" },
-      { name: "おろし生姜", amount: 2, unit: "大さじ" },
-      { name: "紹興酒", amount: 2, unit: "大さじ" },
+      { name: "塩", amount: 2, unit: "小さじ", unitPosition: "before" },
+      { name: "キビ砂糖", amount: 2, unit: "小さじ", unitPosition: "before" },
+      { name: "粗挽き胡椒", amount: 1, unit: "大さじ", unitPosition: "before" },
+      { name: "鶏ガラスープ", amount: 1, unit: "大さじ", unitPosition: "before" },
+      { name: "おろし生姜", amount: 2, unit: "大さじ", unitPosition: "before" },
+      { name: "紹興酒", amount: 2, unit: "大さじ", unitPosition: "before" },
       { name: "ごま油", amount: 50, unit: "ml" },
       { name: "ゼナキング", amount: 0.5, unit: "本" }
     ]
   },
   {
-    title: "野菜餡",
+    title: "🥕 野菜餡",
     baseQuantity: 160,
-    note: "160個分を基準に計算",
     ingredients: [
       { name: "長ネギ", amount: 1, unit: "本" },
       { name: "ニラ", amount: 1, unit: "把" },
@@ -29,13 +27,12 @@ const recipes = [
     ]
   },
   {
-    title: "皮",
+    title: "🥟 皮",
     baseQuantity: 60,
-    note: "7cmの皮、60枚分を基準に計算",
     ingredients: [
       { name: "強力粉", amount: 300, unit: "g" },
       { name: "塩", amount: 1.5, unit: "g" },
-      { name: "ごま油", amount: 1, unit: "大さじ" },
+      { name: "ごま油", amount: 1, unit: "大さじ", unitPosition: "before" },
       { name: "熱湯", amount: null, unit: "適量" }
     ]
   }
@@ -43,7 +40,6 @@ const recipes = [
 
 const quantityInput = document.querySelector("#quantity");
 const results = document.querySelector("#recipe-results");
-const summary = document.querySelector("#summary");
 const quickButtons = document.querySelectorAll("[data-quantity]");
 
 function roundAmount(value) {
@@ -65,7 +61,13 @@ function formatAmount(ingredient, quantity, baseQuantity) {
 
   const scaled = ingredient.amount * (quantity / baseQuantity);
   const prefix = ingredient.prefix ?? "";
-  return `${prefix}${roundAmount(scaled)}${ingredient.unit}`;
+  const amount = roundAmount(scaled);
+
+  if (ingredient.unitPosition === "before") {
+    return `${prefix}${ingredient.unit}${amount}`;
+  }
+
+  return `${prefix}${amount}${ingredient.unit}`;
 }
 
 function normalizeQuantity(value) {
@@ -76,7 +78,6 @@ function normalizeQuantity(value) {
 function renderRecipes() {
   const quantity = normalizeQuantity(quantityInput.value);
   quantityInput.value = quantity;
-  summary.textContent = `${quantity}個分で計算中。肉餡・野菜餡は160個基準、皮は60枚基準です。`;
 
   results.innerHTML = recipes
     .map((recipe) => {
@@ -93,7 +94,6 @@ function renderRecipes() {
         <article class="recipe-card">
           <header>
             <h2>${recipe.title}</h2>
-            <p>${recipe.note}</p>
           </header>
           <dl class="ingredient-list">
             ${ingredients}

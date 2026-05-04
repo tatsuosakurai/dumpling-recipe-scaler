@@ -40,9 +40,9 @@ input {
 
 .calculator {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 380px);
-  gap: 28px;
-  align-items: end;
+  grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
+  gap: 32px;
+  align-items: center;
   padding: 32px;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -50,30 +50,17 @@ input {
   box-shadow: var(--shadow);
 }
 
-.intro h1 {
-  margin: 0;
-  font-size: clamp(2rem, 4vw, 4rem);
-  line-height: 1.08;
-  letter-spacing: 0;
-}
-
-.intro p {
-  max-width: 40rem;
-  margin: 14px 0 0;
-  color: var(--muted);
-}
-
-.eyebrow {
-  margin: 0 0 8px;
-  color: var(--accent);
-  font-size: 0.82rem;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
 .controls {
   display: grid;
-  gap: 12px;
+  gap: 16px;
+  width: 100%;
+}
+
+.dumpling-mark {
+  justify-self: center;
+  font-size: clamp(5rem, 16vw, 10rem);
+  line-height: 1;
+  filter: drop-shadow(0 14px 20px rgba(70, 47, 28, 0.16));
 }
 
 .controls label {
@@ -85,29 +72,34 @@ input {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
+}
+
+.quantity-row span {
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  font-weight: 800;
 }
 
 .quantity-row input {
   width: 100%;
-  min-height: 56px;
-  padding: 8px 14px;
+  min-height: 92px;
+  padding: 10px 20px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface-strong);
   color: var(--text);
-  font-size: 1.45rem;
+  font-size: clamp(3rem, 8vw, 5.5rem);
   font-weight: 700;
 }
 
 .quick-actions {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
+  grid-template-columns: repeat(4, minmax(64px, 1fr));
+  gap: 10px;
 }
 
 .quick-actions button {
-  min-height: 40px;
+  min-height: 48px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface-strong);
@@ -120,13 +112,6 @@ input {
 .quick-actions button:focus-visible {
   border-color: var(--accent);
   outline: none;
-}
-
-.summary {
-  grid-column: 1 / -1;
-  margin: 2px 0 0;
-  color: var(--leaf);
-  font-weight: 700;
 }
 
 .recipe-grid {
@@ -153,12 +138,6 @@ input {
 .recipe-card h2 {
   margin: 0;
   font-size: 1.18rem;
-}
-
-.recipe-card p {
-  margin: 4px 0 0;
-  color: var(--muted);
-  font-size: 0.9rem;
 }
 
 .ingredient-list {
@@ -195,6 +174,10 @@ input {
   .calculator,
   .recipe-grid {
     grid-template-columns: 1fr;
+  }
+
+  .dumpling-mark {
+    font-size: 5.5rem;
   }
 }
 
