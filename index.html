@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>蔓餃苑 餃子分量計算</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="calculator" aria-labelledby="app-title">
+        <div class="intro">
+          <p class="eyebrow">Recipe scaler</p>
+          <h1 id="app-title">蔓餃苑 餃子分量計算</h1>
+          <p>作りたい個数を入れると、肉餡・野菜餡・皮の分量をまとめて計算します。</p>
+        </div>
+
+        <form class="controls" id="recipe-form">
+          <label for="quantity">作る個数</label>
+          <div class="quantity-row">
+            <input id="quantity" name="quantity" type="number" inputmode="numeric" min="1" step="1" value="160">
+            <span>個</span>
+          </div>
+          <div class="quick-actions" aria-label="個数の候補">
+            <button type="button" data-quantity="30">30</button>
+            <button type="button" data-quantity="60">60</button>
+            <button type="button" data-quantity="120">120</button>
+            <button type="button" data-quantity="160">160</button>
+          </div>
+        </form>
+
+        <p class="summary" id="summary" aria-live="polite"></p>
+      </section>
+
+      <section class="recipe-grid" id="recipe-results" aria-live="polite"></section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
